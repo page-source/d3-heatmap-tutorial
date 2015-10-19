@@ -1,25 +1,12 @@
-// d3.tsv("TTtestData.tsv", function(d) {
-//   console.log(d);
-//   return {
-//     userId: +d.userId,
-//     date: d.date,
-//     distance: +d.distance,
-//     dwDistance: +d.dwDistance
-//     type: d.type,
-//     dayPart: d.dayPart
-//   };
-// }, function(error, data) {
-//   console.log(data);
-// });
 
 var margin = { top: 50, right: 0, bottom: 100, left: 30 },
     width = 960 - margin.left - margin.right,
     height = 430 - margin.top - margin.bottom,
-    gridSize = Math.floor(width / 38),
+    gridSize = Math.floor(width / 52),
     legendElementWidth = gridSize*5,
     colors = ["#D500F9","#FFD600","#FF1744","#651FFF","#00B8D4","#64DD17","#FF6D00"], // alternatively colorbrewer.YlGnBu[9]
     days = ["M", "T", "W", "T", "F"],
-    weeks = ["A", "", "S", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "", "J", "", "", "", "F", "", "", "", "M", "", "", "", "A", "", "", "", "M", "", "", ""];
+    weeks = ["J", "", "", "", "F", "", "", "", "M", "", "", "", "A", "", "", "", "M", "", "", "", "J", "", "", "A", "", "S", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "" ];
 
 d3.tsv("TTtestData.tsv",
   function(d) {
