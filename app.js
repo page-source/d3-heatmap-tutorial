@@ -6,7 +6,7 @@ var margin = { top: 50, right: 0, bottom: 100, left: 30 },
     legendElementWidth = gridSize*5,
     colors = ["#D500F9","#FFD600","#FF1744","#651FFF","#00B8D4","#64DD17","#FF6D00"], // alternatively colorbrewer.YlGnBu[9]
     days = ["M", "T", "W", "T", "F"],
-    weeks = ["J", "", "", "", "F", "", "", "", "M", "", "", "", "A", "", "", "", "M", "", "", "", "J", "", "", "A", "", "S", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "" ];
+    weeks = ["J", "", "", "", "F", "", "", "", "M", "", "", "", "A", "", "", "", "M", "", "", "", "J", "", "", "", "J", "", "", "", "A", "", "", "", "S", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "" ];
 
 d3.tsv("TTtestData.tsv",
   function(d) {
