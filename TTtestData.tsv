@@ -4,9 +4,9 @@ userId	date	distance	type	dayPart
 495653	1/9/2014	0.53	walk	morning
 495653	1/10/2014	0.53	walk	morning
 495653	1/13/2014	0.53	walk	morning
-495653	1/14/2014	0.53	walk	morning
-495653	1/15/2014	0.53	walk	morning
-495653	1/16/2014	0.53	walk	morning
+495653	1/14/2014	0.53	school bus	morning
+495653	1/15/2014	0.53	rtd	morning
+495653	1/16/2014	0.53	drive and drop	morning
 495653	1/17/2014	0.53	walk	morning
 495653	1/21/2014	0.53	walk	morning
 495653	1/22/2014	0.53	walk	morning
