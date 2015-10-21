@@ -10,13 +10,19 @@ svg  rect.bordered {
 text.mono {
   font-size: 9pt;
   font-family: sans-serif;
-  fill: gray;
+  fill: #795548;
 }
 
-text.axis-workweek {
+/*.legend {
+  font-size: 9pt;
+  font-family: sans-serif;
+  fill: black;
+}*/
+
+/*text.axis-workweek {
   fill: #000;
 }
 
 text.axis-week {
   fill: #000;
-}
+}*/
