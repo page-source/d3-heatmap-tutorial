@@ -1,17 +1,16 @@
-// set up your
+// set up your variables
 var margin = { top: 30, right: 0, bottom: 30, left: 30 },
     width = 960 - margin.left - margin.right,
     gridSize = Math.floor(width / 52),
     height = (gridSize * 10) - margin.top - margin.bottom,
-    legendElementWidth = gridSize*4,
-    data = ['someData'], // comment out later
+    legendElementWidth = gridSize*3,
     values = ['hike', 'bike', 'swim', 'run', 'stretch', 'climb', 'lift'],
     colors = ["#D500F9", "#651FFF", "#00B8D4", "#64DD17", "#FFD600", "#FF6D00", "#FF1744"],
     days = ["M", "T", "W", "T", "F"],
     weeks = ["J", "", "", "", "F", "", "", "", "M", "", "", "", "A", "", "", "", "M", "", "", "", "J", "", "", "", "J", "", "", "", "A", "", "", "", "S", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "" ];
 
 d3.tsv("heat-map-sample-data.tsv", // Data parsing! Your data here: ('path', callback(), callback())
-  function(d) {
+  function(d) { // here you construct your data object
     day = moment(d.date, "MM/DD/YYYY").day()
     week = moment(d.date, "MM/DD/YYYY").week()
     return {
@@ -21,7 +20,7 @@ d3.tsv("heat-map-sample-data.tsv", // Data parsing! Your data here: ('path', cal
       type: d.type
     };
   },
-  function(error, data) {
+  function(error, data) { // this is the meat of your graphic
 
     // var newValues = [] // find color domain
     // // make an object first
@@ -77,7 +76,7 @@ d3.tsv("heat-map-sample-data.tsv", // Data parsing! Your data here: ('path', cal
         .attr("width", gridSize)
         .attr("height", gridSize)
         .style("fill", function(d) { return colorScale(d.type);})
-        .style("fill-opacity", "50%");
+        .style("fill-opacity", "30%");
         // .style("fill", colors[0]);
 
     heatMap.transition().duration(1000)
@@ -91,7 +90,7 @@ d3.tsv("heat-map-sample-data.tsv", // Data parsing! Your data here: ('path', cal
     var legend = svg.selectAll(".legend")
         .data(colorScale.domain(), function(d) { return d; })
         .enter().append("g")
-        // .attr("class", "legend");
+        .attr("class", "legend");
 
     legend.append("rect")
       .attr("x", function(d, i) { return legendElementWidth * i; })
