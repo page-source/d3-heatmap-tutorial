@@ -4,6 +4,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     gridSize = Math.floor(width / 53),
     height = (gridSize * 10) - margin.top - margin.bottom,
     // legendElementWidth = gridSize * 3,
+
     days = ["M", "T", "W", "T", "F"],
     weeks = ["", "J", "", "", "", "F", "", "", "", "M", "", "", "", "", "A", "", "", "", "M", "", "", "", "J", "", "", "", "", "J", "", "", "", "A", "", "", "", "S", "", "", "", "", "O", "", "", "", "N", "", "", "", "D", "", "", "", "" ],
     values = ['hike', 'bike', 'swim', 'run', 'stretch', 'climb', 'lift'],
@@ -14,37 +15,37 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
 //     day = moment(d.date, "MM/DD/YYYY").day()
 //     week = moment(d.date, "MM/DD/YYYY").week()
 //     return {
-//       date: d.date,
+//       // date: d.date,
 //       day: day,
 //       week: week,
 //       type: d.type
 //     };
 //   },
 //   function(error, data) { // this is the meat of your graphic
-
-    // var newValues = [] // find color domain
-    // // make an object first
-    // var valueObj = data.reduce(function (obj, key) {
-    //   obj[key.type] = 0
-    //   return obj
-    // }, {})
-    // for (key in valueObj) {
-    //   newValues.push(key)
-    // }
-    // newValues.sort()
-    // console.log(newValues);
-
-    // var colorScale = d3.scale.ordinal()
-    //     .domain(values)
-    //     .range(colors);
-
-    var svg = d3.select("#chart").append("svg")
+//
+//     // var newValues = [] // generate color domain from the data
+//     // // make an object first
+//     // var valueObj = data.reduce(function (obj, key) {
+//     //   obj[key.type] = 0
+//     //   return obj
+//     // }, {})
+//     // for (key in valueObj) {
+//     //   newValues.push(key)
+//     // }
+//     // newValues.sort()
+//     // console.log(newValues);
+//
+//     var colorScale = d3.scale.ordinal() // map array of values to array of colors
+//         .domain(newValues)
+//         .range(colors);
+//
+    var svg = d3.select("#chart").append("svg") // attach chart to the dom and center it within svg element based on margins
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // var dayLabels = svg.selectAll(".day")
+    // var dayLabels = svg.selectAll(".day") // add day labels
     //     .data(days)
     //     .enter().append("text")
     //       .text(function (d) { return d; })
@@ -53,8 +54,8 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //       .style("text-anchor", "end")
     //       .attr("transform", "translate(-6," + gridSize / 1.3 + ")")
     //       .attr("class", "mono");
-
-    // var weekLabels = svg.selectAll(".week")
+    //
+    // var weekLabels = svg.selectAll(".week") // add week labels
     //     .data(weeks)
     //     .enter().append("text")
     //       .text(function(d) { return d; })
@@ -64,33 +65,35 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //       .attr("transform", "translate(" + gridSize / 2 + ", -6)")
     //       .attr("class", "mono");
 
-    var heatMap = svg.selectAll(".grid")
+    var heatMap = svg.selectAll(".grid") // make heatMap with data, data can be a hard coded array or an array of objects brought in through another file
         .data([1])
         .enter().append("rect")
         .attr("width", gridSize)
         .attr("height", gridSize)
-        .attr("x", function(d) { return (d.week - 1) * gridSize; })
-        .attr("y", function(d) { return (d.day - 1) * gridSize; })
-        .attr("rx", 4)
-        .attr("ry", 4)
-        .attr("class", "bordered")
+        // .attr("x", function(d) { return (d.week - 1) * gridSize; })
+        // .attr("y", function(d) { return (d.day - 1) * gridSize; })
+        // .attr("rx", 4)
+        // .attr("ry", 4)
+        // .attr("class", "bordered")
         // .style("fill", function(d) { return colorScale(d.type);})
         .style("fill", colors[0]);
 
-//     heatMap.transition().duration(1000)
-//         .style("fill", function(d) { return colorScale(d.type); })
-//         .style("fill-opacity", "60%");
-//
-//     heatMap.append("title").text(function(d) {
-//       var title = d.type + ' ' + d.date
-//       return title; });
-//
-//     var legend = svg.selectAll(".legend")
-//         .data(colorScale.domain(), function(d) { return d; })
+    // heatMap.transition().duration(1000) // example d3 animation
+    //     .style("fill", function(d) { return colorScale(d.type); })
+    //     .style("fill-opacity", "60%");
+    //
+    // heatMap.append("title") // append and format title element
+    //     .text(function(d) {
+    //       var title = d.type + ' ' + d.date
+    //       return title;
+    //     });
+
+//     var legend = svg.selectAll(".legend") // create legend, legend data is the color domain
+//         .data(colorScale.domain(), function(d) { return d; }) // d is each element in the data
 //         .enter().append("g")
 //         .attr("class", "legend");
 //
-//     legend.append("rect")
+//     legend.append("rect") // define legend rectangles
 //       .attr("x", function(d, i) { return legendElementWidth * i; })
 //       .attr("y", gridSize * 6)
 //       .attr("width", legendElementWidth)
@@ -98,15 +101,15 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
 //       .attr("class", "bordered")
 //       .attr("rx", 4)
 //       .attr("ry", 4)
-//       .style("fill", function(d, i) { return colors[i]; })
+//       .style("fill", function(d, i) { return colors[i]; }) // map color domain array (d) to color range array
 //       .style("fill-opacity", "60%");
 //
 //
-//     legend.append("text")
-//       .attr("class", "mono")
+//     legend.append("text") // add legend text to same coordinates as legend rectangles, center
 //       .text(function(d) { return d; })
 //       .attr("x", function(d, i) { return (legendElementWidth * i) + legendElementWidth/2; })
 //       .attr("y", (gridSize * 6) + (gridSize/1.4))
+//       .attr("class", "mono")
 //       .style("text-anchor", "middle");
 //
 // });
