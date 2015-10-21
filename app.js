@@ -21,7 +21,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
 //       type: d.type
 //     };
 //   },
-//   function(error, data) { // this is the meat of your graphic
+//   function(error, data) { // this callback is the meat of your graphic, data will be undefined outside of this function
 //
 //     // var newValues = [] // generate color domain from the data
 //     // // make an object first
