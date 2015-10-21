@@ -1,4 +1,4 @@
-// set up your variables
+// first, initialize the variables that are independent of the data
 var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     width = 1000 - margin.left - margin.right,
     gridSize = Math.floor(width / 53),
@@ -40,11 +40,11 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //     .domain(values) // change this to newValues if you use optional code above
     //     .range(colors);
 
-    var svg = d3.select("#chart").append("svg") // attach chart to the dom and center it within svg element based on margins
+    var svg = d3.select("#chart").append("svg") // attach chart to the dom and center it within an svg element based on margins
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .append("g") // an svg "group", similar to an html "div"
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // var dayLabels = svg.selectAll(".day") // add day labels
     //     .data(days)
@@ -69,15 +69,15 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     var heatMap = svg.selectAll(".grid") // make heatMap with data, data can be a hard coded array or an array of objects brought in through another file
         .data([1]) // play with this, but later change this it to the data that is passed in on line 24
         .enter().append("rect")
-        .attr("width", gridSize)
-        .attr("height", gridSize)
-        // .attr("x", function(d) { return (d.week - 1) * gridSize; })
-        // .attr("y", function(d) { return (d.day - 1) * gridSize; })
-        // .attr("rx", 4)
-        // .attr("ry", 4)
-        // .attr("class", "bordered")
-        // .style("fill", function(d) { return colorScale(d.type);}) // use this line if you are not using the transition() to a new color
-        .style("fill", colors[0]); // use this line as a default OR if you are using the transition() to new color
+          .attr("width", gridSize)
+          .attr("height", gridSize)
+          // .attr("x", function(d) { return (d.week - 1) * gridSize; })
+          // .attr("y", function(d) { return (d.day - 1) * gridSize; })
+          // .attr("rx", 4)
+          // .attr("ry", 4)
+          // .attr("class", "bordered")
+          // .style("fill", function(d) { return colorScale(d.type);}) // use this line if you are not using the transition() to a new color
+          .style("fill", colors[0]); // use this line as a default OR if you are using the transition() to new color
 
     // heatMap.transition().duration(1000) // example d3 animation
     //     .style("fill", function(d) { return colorScale(d.type); })
@@ -92,7 +92,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     // var legend = svg.selectAll(".legend") // create legend, legend data is the color domain
     //     .data(colorScale.domain(), function(d) { return d; }) // d is each element in the data
     //     .enter().append("g")
-    //     .attr("class", "legend");
+    //       .attr("class", "legend");
     //
     // legend.append("rect") // define legend rectangles
     //   .attr("x", function(d, i) { return legendElementWidth * i; })
