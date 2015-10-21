@@ -22,23 +22,24 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
 //     };
 //   },
 //   function(error, data) { // this callback is the meat of your graphic, data will be undefined outside of this function
-//
-//     // var newValues = [] // generate color domain from the data
-//     // // make an object first
-//     // var valueObj = data.reduce(function (obj, key) {
-//     //   obj[key.type] = 0
-//     //   return obj
-//     // }, {})
-//     // for (key in valueObj) {
-//     //   newValues.push(key)
-//     // }
-//     // newValues.sort()
-//     // console.log(newValues);
-//
-//     var colorScale = d3.scale.ordinal() // map array of values to array of colors
-//         .domain(newValues)
-//         .range(colors);
-//
+//     if (error) {console.log(error);}
+
+    // var newValues = [] // optional code to generate color domain from the data
+    // // make an object first
+    // var valueObj = data.reduce(function (obj, key) {
+    //   obj[key.type] = 0
+    //   return obj
+    // }, {})
+    // for (key in valueObj) {
+    //   newValues.push(key)
+    // }
+    // newValues.sort()
+    // console.log(newValues);
+
+    // var colorScale = d3.scale.ordinal() // map array of values to array of colors
+    //     .domain(values) // change this to newValues if you use optional code above
+    //     .range(colors);
+
     var svg = d3.select("#chart").append("svg") // attach chart to the dom and center it within svg element based on margins
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -53,7 +54,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //       .attr("y", function (d, i) { return i * gridSize; })
     //       .style("text-anchor", "end")
     //       .attr("transform", "translate(-6," + gridSize / 1.3 + ")")
-    //       .attr("class", "mono");
+    //       .attr("class", "label");
     //
     // var weekLabels = svg.selectAll(".week") // add week labels
     //     .data(weeks)
@@ -63,10 +64,10 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //       .attr("y", 0)
     //       .style("text-anchor", "middle")
     //       .attr("transform", "translate(" + gridSize / 2 + ", -6)")
-    //       .attr("class", "mono");
+    //       .attr("class", "label");
 
     var heatMap = svg.selectAll(".grid") // make heatMap with data, data can be a hard coded array or an array of objects brought in through another file
-        .data([1])
+        .data([1]) // play with this, but later change this it to the data that is passed in on line 24
         .enter().append("rect")
         .attr("width", gridSize)
         .attr("height", gridSize)
@@ -75,8 +76,8 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
         // .attr("rx", 4)
         // .attr("ry", 4)
         // .attr("class", "bordered")
-        // .style("fill", function(d) { return colorScale(d.type);})
-        .style("fill", colors[0]);
+        // .style("fill", function(d) { return colorScale(d.type);}) // use this line if you are not using the transition() to a new color
+        .style("fill", colors[0]); // use this line as a default OR if you are using the transition() to new color
 
     // heatMap.transition().duration(1000) // example d3 animation
     //     .style("fill", function(d) { return colorScale(d.type); })
@@ -88,28 +89,28 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //       return title;
     //     });
 
-//     var legend = svg.selectAll(".legend") // create legend, legend data is the color domain
-//         .data(colorScale.domain(), function(d) { return d; }) // d is each element in the data
-//         .enter().append("g")
-//         .attr("class", "legend");
-//
-//     legend.append("rect") // define legend rectangles
-//       .attr("x", function(d, i) { return legendElementWidth * i; })
-//       .attr("y", gridSize * 6)
-//       .attr("width", legendElementWidth)
-//       .attr("height", gridSize)
-//       .attr("class", "bordered")
-//       .attr("rx", 4)
-//       .attr("ry", 4)
-//       .style("fill", function(d, i) { return colors[i]; }) // map color domain array (d) to color range array
-//       .style("fill-opacity", "60%");
-//
-//
-//     legend.append("text") // add legend text to same coordinates as legend rectangles, center
-//       .text(function(d) { return d; })
-//       .attr("x", function(d, i) { return (legendElementWidth * i) + legendElementWidth/2; })
-//       .attr("y", (gridSize * 6) + (gridSize/1.4))
-//       .attr("class", "mono")
-//       .style("text-anchor", "middle");
-//
+    // var legend = svg.selectAll(".legend") // create legend, legend data is the color domain
+    //     .data(colorScale.domain(), function(d) { return d; }) // d is each element in the data
+    //     .enter().append("g")
+    //     .attr("class", "legend");
+    //
+    // legend.append("rect") // define legend rectangles
+    //   .attr("x", function(d, i) { return legendElementWidth * i; })
+    //   .attr("y", gridSize * 6)
+    //   .attr("width", legendElementWidth)
+    //   .attr("height", gridSize)
+    //   .attr("class", "bordered")
+    //   .attr("rx", 4)
+    //   .attr("ry", 4)
+    //   .style("fill", function(d, i) { return colors[i]; }) // map color domain array (d) to color range array
+    //   .style("fill-opacity", "60%");
+    //
+    //
+    // legend.append("text") // add legend text labels to same coordinates as legend rectangles, center
+    //   .text(function(d) { return d; })
+    //   .attr("x", function(d, i) { return (legendElementWidth * i) + legendElementWidth/2; })
+    //   .attr("y", (gridSize * 6) + (gridSize/1.4))
+    //   .attr("class", "label")
+    //   .style("text-anchor", "middle");
+
 // });
