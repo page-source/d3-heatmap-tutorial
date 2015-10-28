@@ -10,6 +10,36 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     values = ['hike', 'bike', 'swim', 'run', 'stretch', 'climb', 'lift'],
     colors = ["#D500F9", "#651FFF", "#00B8D4", "#64DD17", "#FFD600", "#FF6D00", "#FF1744"];
 
+var svg = d3.select("#chart").append("svg") // attach chart to the DOM and center it within an svg element based on margins
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g") // an svg "group", similar to an html "div"
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// var colorScale = d3.scale.ordinal() // map array of values to array of colors
+//     .domain(values) // move this inside of data callback and change this to newValues if you use option code to generate domain from the data
+//     .range(colors);
+
+// var dayLabels = svg.selectAll(".day") // add day labels
+//     .data(days)
+//     .enter().append("text")
+//       .text(function (d) { return d; })
+//       .attr("x", 0)
+//       .attr("y", function (d, i) { return i * gridSize; })
+//       .style("text-anchor", "end")
+//       .attr("transform", "translate(-6," + gridSize / 1.3 + ")")
+//       .attr("class", "label");
+
+// var weekLabels = svg.selectAll(".week") // add week labels
+//     .data(weeks)
+//     .enter().append("text")
+//       .text(function(d) { return d; })
+//       .attr("x", function(d, i) { return i * gridSize; })
+//       .attr("y", 0)
+//       .style("text-anchor", "middle")
+//       .attr("transform", "translate(" + gridSize / 2 + ", -6)")
+//       .attr("class", "label");
+
 // d3.tsv("heat-map-sample-data.tsv", // Data parsing! Your data here: ('path', callback(), callback())
 //   function(d) { // in the first cb you construct your data object
 //     day = moment(d.date, "MM/DD/YYYY").day()
@@ -36,35 +66,6 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     // newValues.sort()
     // console.log(newValues);
 
-    // var colorScale = d3.scale.ordinal() // map array of values to array of colors
-    //     .domain(values) // change this to newValues if you use optional code above
-    //     .range(colors);
-
-    var svg = d3.select("#chart").append("svg") // attach chart to the dom and center it within an svg element based on margins
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g") // an svg "group", similar to an html "div"
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    // var dayLabels = svg.selectAll(".day") // add day labels
-    //     .data(days)
-    //     .enter().append("text")
-    //       .text(function (d) { return d; })
-    //       .attr("x", 0)
-    //       .attr("y", function (d, i) { return i * gridSize; })
-    //       .style("text-anchor", "end")
-    //       .attr("transform", "translate(-6," + gridSize / 1.3 + ")")
-    //       .attr("class", "label");
-    //
-    // var weekLabels = svg.selectAll(".week") // add week labels
-    //     .data(weeks)
-    //     .enter().append("text")
-    //       .text(function(d) { return d; })
-    //       .attr("x", function(d, i) { return i * gridSize; })
-    //       .attr("y", 0)
-    //       .style("text-anchor", "middle")
-    //       .attr("transform", "translate(" + gridSize / 2 + ", -6)")
-    //       .attr("class", "label");
 
     var heatMap = svg.selectAll(".grid") // make heatMap with data, data can be a hard coded array or an array of objects brought in through another file
         .data([1]) // play with this, but later change this it to the data that is passed in on line 24
@@ -82,7 +83,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     // heatMap.transition().duration(1000) // example d3 animation
     //     .style("fill", function(d) { return colorScale(d.type); })
     //     .style("fill-opacity", "60%");
-    //
+
     // heatMap.append("title") // append and format title element
     //     .text(function(d) {
     //       var title = d.type + ' ' + d.date
@@ -93,7 +94,7 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //     .data(colorScale.domain(), function(d) { return d; }) // d is each element in the data
     //     .enter().append("g")
     //       .attr("class", "legend");
-    //
+
     // legend.append("rect") // define legend rectangles
     //   .attr("x", function(d, i) { return legendElementWidth * i; })
     //   .attr("y", gridSize * 6)
@@ -104,8 +105,8 @@ var margin = { top: 30, right: 10, bottom: 30, left: 30 },
     //   .attr("ry", 4)
     //   .style("fill", function(d, i) { return colors[i]; }) // map color domain array (d) to color range array
     //   .style("fill-opacity", "60%");
-    //
-    //
+
+
     // legend.append("text") // add legend text labels to same coordinates as legend rectangles, center
     //   .text(function(d) { return d; })
     //   .attr("x", function(d, i) { return (legendElementWidth * i) + legendElementWidth/2; })
