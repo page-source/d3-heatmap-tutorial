@@ -8,3 +8,13 @@ text.label {
   font-family: sans-serif;
   fill: #795548;
 }
+
+#chart{
+	width: 85%;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+h1{
+		text-align: center;
+		text-decoration: underline;
+}
